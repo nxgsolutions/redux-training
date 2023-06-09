@@ -5,6 +5,8 @@ import thunk from 'redux-thunk';
 
 const initialState ={
     users:[],
+
+    checkData:false,
 }
 
 const reducer = combineReducers({

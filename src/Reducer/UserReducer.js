@@ -1,17 +1,23 @@
 import React from 'react'
-import { GET_USER_REQUEST, GET_USER_SUCCESS,GET_USER_FAIL } from '../Constants/userConstant'
+import { GET_USER_REQUEST, GET_USER_SUCCESS,GET_USER_FAIL,ADD_USER_SUCCESS,ADD_USER_REQUEST,ADD_USER_FAIL } from '../Constants/userConstant'
 
 export const UserReducer = (state={users:[]}, action) => {
 
-    console.log("Reducer data",action)
+    console.log("Reducer data",action.payload)
 
     switch (action.type) {
         case GET_USER_REQUEST:
             return {loading:true}
         case GET_USER_SUCCESS:
-            return {loading:false,users:action.payload}
+            return {loading:false,users:action.payload.data}
         case GET_USER_FAIL:
             return {loading:false,error:action.payload}
+        case ADD_USER_REQUEST:
+            return{  loading:true}  
+        case ADD_USER_SUCCESS:
+            return{  loading:false,users: [...state.users,action.payload.data]}    
+        case ADD_USER_FAIL:
+            return{  loading:false, error:action.payload}    
      default:
             return state;
 
