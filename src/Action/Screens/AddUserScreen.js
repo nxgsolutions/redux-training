@@ -20,7 +20,7 @@ const AddUserScreen = () => {
     <div>
       <input type="text" value={name} onChange={(e)=>setName(e.target.value)}/>
       <br/>
-      <button type="button" onClick={postUser} >Save DD</button> 
+      <button type="button" onClick={postUser} >Save</button> 
         </div>
   )
 }

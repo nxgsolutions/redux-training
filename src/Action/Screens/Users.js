@@ -7,12 +7,12 @@ import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import Home from '../../Home'
 import AddUserScreen from './AddUserScreen'
-
+import { DeleteUser } from '../userAction';
 const Users = () => {
 
     const dispatch = useDispatch();
 
-    const userData = useSelector((state) => state.users);
+    const userData = useSelector((state) => state.usersData);
     const { loading, users, error } = userData;
 
    const [state, setstate] = useState(0)
@@ -29,6 +29,10 @@ const Users = () => {
 
     console.log("screen data",users)
 
+   const handleDelete= (id)=>{
+      dispatch(DeleteUser(id));
+   }
+
   return (
     <div>
       <AddUserScreen/>
@@ -37,7 +41,7 @@ const Users = () => {
             <h2>state=={state}</h2>
             {
               loading?<CircularProgress />:error?"Network error": users?.map((user,index)=>(
-                        <p>{user.name}</p>
+                        <p>{user.name}  <button onClick={(e)=>handleDelete(user.id)}>Delete</button>  </p>
                 ))
             }
       <Home state={state}></Home>
