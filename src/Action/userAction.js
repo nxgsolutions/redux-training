@@ -7,9 +7,9 @@ export const GetUser = () => async(dispatch)=>{
 
     try{
 
-    const  data = await axios.get(`https://647d90c8af9847108549df8d.mockapi.io/users`);
+    const  response = await axios.get(`https://647d90c8af9847108549df8d.mockapi.io/users`);
 
-    dispatch({ type:GET_USER_SUCCESS,payload:data.data})
+    dispatch({ type:GET_USER_SUCCESS,payload:response.data})
     console.log("Action data",data)
 
     }
@@ -25,9 +25,9 @@ export const AddUser = (postData) => async(dispatch)=>{
     dispatch({ type:ADD_USER_REQUEST,payload:{}})
 
     try{
-        const  data = await axios.post(`https://647d90c8af9847108549df8d.mockapi.io/users`,postData);
+        const  response = await axios.post(`https://647d90c8af9847108549df8d.mockapi.io/users`,postData);
         console.log("post action",data.data)
-        dispatch({ type:ADD_USER_SUCCESS,payload:{name:data.data.name,id:data.data.id}})
+        dispatch({ type:ADD_USER_SUCCESS,payload:response.data})
 
     }
     catch(error)
@@ -44,9 +44,9 @@ export const DeleteUser = (id) =>async(dispatch) =>{
     dispatch({ type:DELETE_USER_REQUEST,payload:{}})
 
     try{
-        const  data = await axios.delete(`https://647d90c8af9847108549df8d.mockapi.io/users/`+id);
+        const  response = await axios.delete(`https://647d90c8af9847108549df8d.mockapi.io/users/`+id);
         console.log("post action",data.data)
-        dispatch({ type:DELETE_USER_SUCCESS,payload:data})
+        dispatch({ type:DELETE_USER_SUCCESS,payload:response})
 
     }
     catch(error)

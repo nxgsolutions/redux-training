@@ -12,8 +12,8 @@ const Users = () => {
 
     const dispatch = useDispatch();
 
-    const userData = useSelector((state) => state.usersData);
-    const { loading, users, error } = userData;
+    const usersData = useSelector((state) => state.usersData);
+    const { loading, users, error } = usersData;
 
    const [state, setstate] = useState(0)
 
@@ -42,7 +42,7 @@ const Users = () => {
             {
               loading?<CircularProgress />:error?"Network error": users?.map((user,index)=>(
                         <p>{user.name}  <button onClick={(e)=>handleDelete(user.id)}>Delete</button>  </p>
-                ))
+                )).reverse()
             }
       <Home state={state}></Home>
     </div>
