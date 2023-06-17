@@ -19,7 +19,7 @@ useEffect(()=>{
 },[])
 
   return (
-    <div >
+    <div className='App' >
           <h1>My APP</h1>
           {/* <FetchApp /> */}
   <BrowserRouter>
