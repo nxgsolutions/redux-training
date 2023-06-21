@@ -1,5 +1,5 @@
 import React from 'react'
-import { GET_USER_REQUEST,GET_USER_SUCCESS,GET_USER_FAIL,ADD_USER_REQUEST,ADD_USER_SUCCESS,ADD_USER_FAIL, DELETE_USER_REQUEST, DELETE_USER_SUCCESS, DELETE_USER_FAIL ,GET_USER_ID_REQUEST,GET_USER_ID_SUCCESS,GET_USER_ID_FAIL} from '../Constants/userConstant';
+import { GET_USER_REQUEST,GET_USER_SUCCESS,GET_USER_FAIL,ADD_USER_REQUEST,ADD_USER_SUCCESS,ADD_USER_FAIL, DELETE_USER_REQUEST, DELETE_USER_SUCCESS, DELETE_USER_FAIL,UPDATE_USER_REQUEST,UPDATE_USER_SUCCESS,UPDATE_USER_FAIL} from '../Constants/userConstant';
 import axios from 'axios';
 
 export const GetUser = () => async(dispatch)=>{
@@ -58,9 +58,23 @@ export const DeleteUser = (id) =>async(dispatch) =>{
 
 
 
-export const UpdateUser = () => {
+export const UpdateUser = (postData) => async(dispatch)=>{
     
+  
+    dispatch({ type:UPDATE_USER_REQUEST,payload:{}})
+
+    try{
+        const  response = await axios.put(`https://647d90c8af9847108549df8d.mockapi.io/users/`+postData.id,postData);
+       // console.log("post action",data.data)
+        dispatch({ type:UPDATE_USER_SUCCESS,payload:response.data})
+
+    }
+    catch(error)
+    {
+        dispatch({ type:UPDATE_USER_FAIL,payload:error})
+    }
  
+
 
 
 }
