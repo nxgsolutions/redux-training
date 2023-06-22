@@ -1,23 +1,23 @@
 import React from 'react'
 import { GET_USER_REQUEST, GET_USER_SUCCESS,GET_USER_FAIL,ADD_USER_SUCCESS,ADD_USER_REQUEST,ADD_USER_FAIL,DELETE_USER_REQUEST, DELETE_USER_SUCCESS, DELETE_USER_FAIL ,GET_USER_ID_REQUEST,GET_USER_ID_SUCCESS,GET_USER_ID_FAIL,GET_USER_ID_RESET,UPDATE_USER_SUCCESS } from '../Constants/userConstant'
 
-export const UserReducer = (state={users:[],userById:[]}, action) => {
+export const UserReducer = (state={users:[],userById:[],showMessage:""}, action) => {
 
     console.log("Reducer data",action.payload)
 
     switch (action.type) {
         case GET_USER_REQUEST:
-            return {loading:true}
+            return {getLoading:true}
         case GET_USER_SUCCESS:
-            return {...state,loading:false,users:action.payload}
+            return {...state,getLoading:false,users:action.payload}
         case GET_USER_FAIL:
-            return {loading:false,error:action.payload}
+            return {getLoading:false,error:action.payload}
 
         case ADD_USER_REQUEST:
-            return{  ...state,loading:true}  
+            return{  ...state,loading:true,showMessage:false}  
         case ADD_USER_SUCCESS:
             console.log("add state.users",state.users)
-            return{ ...state, loading:false,users: [...state.users,action.payload]}    
+            return{ ...state, loading:false,users: [...state.users,action.payload],showMessage:true}    
         case ADD_USER_FAIL:
             return{  loading:false, error:action.payload}  
             
