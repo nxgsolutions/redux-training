@@ -20,6 +20,7 @@ const AddUserScreen = (props) => {
   function postUser(){
     console.log("called")
     dispatch(AddUser(postData))
+    
   }
   function updateUser(){
     console.log("called update")
