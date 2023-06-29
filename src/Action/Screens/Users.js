@@ -88,7 +88,7 @@ const Users = () => {
       <h2>state=={state}</h2>
       {
         getLoading ? <CircularProgress /> : error ? "Network error" : users?.map((user, index) => (
-          <p>{user.name} <button onClick={() => handleEdit(user.id)}>Edit</button>  <button onClick={(e) => handleDelete(user.id)}>Delete</button>  </p>
+          <p>{user.name.toUpperCase()} <button onClick={() => handleEdit(user.id)}>Edit</button>  <button onClick={(e) => handleDelete(user.id)}>Delete</button>  </p>
         )).reverse()
       }
       <Home state={state}></Home>
