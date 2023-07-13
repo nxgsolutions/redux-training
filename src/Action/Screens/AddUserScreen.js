@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { UpdateUser } from '../userAction'
 import { useForm } from 'react-hook-form'
+import './AddUserScreen.css'
 const AddUserScreen = (props) => {
 //
   const {
@@ -47,22 +48,22 @@ const AddUserScreen = (props) => {
 
     console.log("errors",errors)
   return (
-    <div>
+    <div className='input-form'>
       <form onSubmit={handleSubmit(postUser)}>
         {/* <button onClick={() => navigate(-1)}>go back</button> */}
-        <p>Name</p>
-      <input type="text" {...register("name",{ required:"please enter name", minLength: {  value:3, message:"please enter minimum 3 charecter"}   }  )} placeholder='enter name'  />
+        {/* <p>Name</p> */}
+      <input className='input-item' type="text" {...register("name",{ required:"*Name is Required ", minLength: {  value:3, message:"please enter minimum 3 charecter"}   }  )} placeholder='Enter name'  />
       <br/>
       <small>{errors?.name?.message}</small>
      
-      <p>Class</p>
-      <input type="text"  {...register("class",{required:"please enter class", pattern:{ value:/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,message:"invalid Email" }})}  placeholder='enter Class'  />
+      {/* <p>Class</p> */}
+      <input className='input-item' type="text"  {...register("class",{required:"  *Class is Required", pattern:{ value:/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,message:"invalid Email" }})}  placeholder='Enter Class'  />
       <br/>
       <small>{errors?.class?.message}</small>
       <br/>
     { props.userById ?  <button type="submit" >Update</button> 
 
-     : <button type="submit" >Save</button> }
+     : <button className='btn' type="submit" >Save</button> }
      </form>
         </div>
   )

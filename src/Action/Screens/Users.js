@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import * as React from 'react';
+import { useEffect } from 'react'
 import { AddUser, GetUser } from '../userAction'
 import { GET_USER_ID_SUCCESS, GET_USER_ID_RESET } from '../../Constants/userConstant';
 import { useDispatch } from 'react-redux'
@@ -10,6 +11,17 @@ import AddUserScreen from './AddUserScreen'
 import { DeleteUser } from '../userAction';
 import { GetUserByID } from '../userAction';
 import { Navigate } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -82,16 +94,53 @@ const Users = () => {
              {error}
            </Alert>
          </Snackbar>  }
+         <h1>Add New Data</h1>
       <AddUserScreen userById={userById ? userById : false} />
       <h1>Users</h1>
-      <button onClick={() => setstate(state + 1)}>Click me</button>
-      <h2>state=={state}</h2>
-      {
+      {/* <button onClick={() => setstate(state + 1)}>Click me</button>
+      <h2>state=={state}</h2> */}
+      <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+        <TableHead sx={{backgroundColor:"#b897c5ba"}}>
+          <TableRow>
+             
+            <TableCell align="right">Name</TableCell>
+            <TableCell>Edit /  Delete</TableCell>
+             
+             
+          </TableRow>
+        </TableHead>
+        <TableBody>
+        {
+        getLoading ? <CircularProgress /> : error ? "Network error" : users?.map((user, index) => (
+            <TableRow
+              key={user.name}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              {/* <TableCell component="th" scope="row">
+                {row.name}
+              </TableCell> */}
+              <TableCell align="right">{user.name.toUpperCase()}</TableCell>
+              <Stack direction="row" spacing={2}>
+      <Button color="secondary" onClick={() => handleEdit(user.id)}><EditIcon/></Button>
+      <Button color="secondary"onClick={(e) => handleDelete(user.id)}><DeleteIcon/></Button>
+       
+    </Stack>
+              {/* <TableCell align="right">{user. class}</TableCell> */}
+        
+            </TableRow>
+          )).reverse()
+          }
+        </TableBody>
+      </Table>
+    </TableContainer>
+
+      {/* {
         getLoading ? <CircularProgress /> : error ? "Network error" : users?.map((user, index) => (
           <p>{user.name.toUpperCase()} <button onClick={() => handleEdit(user.id)}>Edit</button>  <button onClick={(e) => handleDelete(user.id)}>Delete</button>  </p>
         )).reverse()
-      }
-      <Home state={state}></Home>
+      } */}
+      {/* <Home state={state}></Home> */}
     </div>
   )
 }

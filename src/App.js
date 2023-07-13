@@ -43,7 +43,7 @@ useEffect(()=>{
 // console.log("originalText==",originalText);
   return (
     <div className='App' >
-          <h1>My APP</h1>
+          {/* <h1>My APP</h1> */}
           {/* <FetchApp /> */}
   <BrowserRouter>
   
