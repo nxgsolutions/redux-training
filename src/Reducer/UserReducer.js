@@ -1,7 +1,7 @@
 import React from 'react'
 import { GET_USER_REQUEST, GET_USER_SUCCESS,GET_USER_FAIL,ADD_USER_SUCCESS,ADD_USER_REQUEST,ADD_USER_FAIL,DELETE_USER_REQUEST, DELETE_USER_SUCCESS, DELETE_USER_FAIL ,GET_USER_ID_REQUEST,GET_USER_ID_SUCCESS,GET_USER_ID_FAIL,GET_USER_ID_RESET,UPDATE_USER_SUCCESS } from '../Constants/userConstant'
 
-export const UserReducer = (state={users:[],userById:[],showMessage:""}, action) => {
+export const UserReducer = (state={users:[],userById:[],showMessage:"",deletedMessage:""}, action) => {
 
     console.log("Reducer data",action.payload)
 
@@ -22,10 +22,10 @@ export const UserReducer = (state={users:[],userById:[],showMessage:""}, action)
             return{  loading:false, error:action.payload}  
             
         case DELETE_USER_REQUEST:
-            return{ ...state, loading:true}  
+            return{ ...state, loading:true,deletedMessage:false}  
         case DELETE_USER_SUCCESS:
             console.log("state.users",state.users)
-            return{ ...state, loading:false,users:state.users.filter(user=>user.id != action.payload.data.id)}    
+            return{ ...state, loading:false,users:state.users.filter(user=>user.id != action.payload.data.id),deletedMessage:true}    
         case DELETE_USER_FAIL:
             return{  loading:false, error:action.payload}  
                     case GET_USER_REQUEST:

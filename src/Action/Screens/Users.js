@@ -35,9 +35,11 @@ const Users = () => {
   const [open, setOpen] = React.useState(false);
 
   const [errorOpen, setErrorOpen] = React.useState(false);
+  const [deleteOpen, setDeleteOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(true);
+    setDeleteOpen(true);
   };
 
   const handleClose = (event, reason) => {
@@ -46,9 +48,10 @@ const Users = () => {
     }
 
     setOpen(false);
+    setDeleteOpen(false);
   };
   const usersData = useSelector((state) => state.usersData);
-  const { getLoading,loading, users, error, userById,showMessage } = usersData;
+  const { getLoading,loading, users, error, userById,showMessage,deletedMessage } = usersData;
 
   const [state, setstate] = useState(0)
   console.log("userById", userById)
@@ -65,6 +68,13 @@ const Users = () => {
 
     error && setErrorOpen(true)
   }, [showMessage])//run every time when state changed
+
+  useEffect(() => { 
+    deletedMessage &&  setDeleteOpen(true);
+    console.log("Second Useeffect",deleteOpen)
+
+    error && setErrorOpen(true)
+  }, [deletedMessage])//run every time when state changed
 
 
 
@@ -92,6 +102,11 @@ const Users = () => {
      {error &&  <Snackbar open={errorOpen} autoHideDuration={2000} onClose={handleClose}>
            <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
              {error}
+           </Alert>
+         </Snackbar>  }
+     {deletedMessage &&  <Snackbar open={deleteOpen} autoHideDuration={2000} onClose={handleClose}>
+           <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+              Deleted successfuly!
            </Alert>
          </Snackbar>  }
          <h1>Add New Data</h1>
