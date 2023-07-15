@@ -61,7 +61,7 @@ const AddUserScreen = (props) => {
       <br/>
       <small>{errors?.class?.message}</small>
       <br/>
-    { props.userById ?  <button type="submit" >Update</button> 
+    { props.userById ?  <button className='btn' type="submit" >Update</button> 
 
      : <button className='btn' type="submit" >Save</button> }
      </form>

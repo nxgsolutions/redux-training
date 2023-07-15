@@ -33,16 +33,24 @@ form{
    border-radius: 9px;
    outline: none;
    border: none;
+   
    box-shadow: 4px 3px 15px grey;
    
 }
+/* form onSubmit:hover{
+    background-color: rgb(22, 178, 22); 
+    padding: 12px;
+    margin-top: 8px;
+    font-size: 20px;
+    border-radius: 9px;
+} */
 .btn:hover{
    background-color: rgb(22, 178, 22); 
    padding: 12px;
    margin-top: 8px;
    font-size: 20px;
    border-radius: 9px;
-   
+   cursor: pointer;
 }
 .input-item:hover {
     padding: 17px;
