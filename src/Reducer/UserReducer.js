@@ -1,7 +1,7 @@
 import React from 'react'
-import { GET_USER_REQUEST, GET_USER_SUCCESS,GET_USER_FAIL,ADD_USER_SUCCESS,ADD_USER_REQUEST,ADD_USER_FAIL,DELETE_USER_REQUEST, DELETE_USER_SUCCESS, DELETE_USER_FAIL ,GET_USER_ID_REQUEST,GET_USER_ID_SUCCESS,GET_USER_ID_FAIL,GET_USER_ID_RESET,UPDATE_USER_SUCCESS } from '../Constants/userConstant'
+import { GET_USER_REQUEST, GET_USER_SUCCESS,GET_USER_FAIL,ADD_USER_SUCCESS,ADD_USER_REQUEST,ADD_USER_FAIL,DELETE_USER_REQUEST, DELETE_USER_SUCCESS, DELETE_USER_FAIL ,GET_USER_ID_REQUEST,GET_USER_ID_SUCCESS,GET_USER_ID_FAIL,GET_USER_ID_RESET,UPDATE_USER_REQUEST,UPDATE_USER_SUCCESS,UPDATE_USER_FAIL } from '../Constants/userConstant'
 
-export const UserReducer = (state={users:[],userById:[],showMessage:"",deletedMessage:""}, action) => {
+export const UserReducer = (state={users:[],userById:[],showMessage:"",deletedMessage:"" }, action) => {
 
     console.log("Reducer data",action.payload)
 
@@ -22,13 +22,13 @@ export const UserReducer = (state={users:[],userById:[],showMessage:"",deletedMe
             return{  loading:false, error:action.payload}  
             
         case DELETE_USER_REQUEST:
-            return{ ...state, loading:true,deletedMessage:false}  
+            return{ ...state, loading:true,deletedMessage:false }  
         case DELETE_USER_SUCCESS:
             console.log("state.users",state.users)
-            return{ ...state, loading:false,users:state.users.filter(user=>user.id != action.payload.data.id),deletedMessage:true}    
+            return{ ...state, loading:false,users:state.users.filter(user=>user.id != action.payload.data.id),deletedMessage:true }    
         case DELETE_USER_FAIL:
             return{  loading:false, error:action.payload}  
-                    case GET_USER_REQUEST:
+        case GET_USER_REQUEST:
             return {loading:true}
 
 
@@ -39,13 +39,16 @@ export const UserReducer = (state={users:[],userById:[],showMessage:"",deletedMe
                 return {...state,loading:false,userById:state.users.find((x)=>x.id===action.payload)}
         case GET_USER_ID_FAIL:
                 return {...state,loading:false,error:action.payload}   
+                
         case GET_USER_ID_RESET :
             return {...state,loading:false,userById:[]}
 
-            
+            // case UPDATE_USER_REQUEST:
+            //     return { ...state,loading:true,userById:[] }   
          case UPDATE_USER_SUCCESS:
             return  { ...state,loading:false,users:state.users.map(user=>user.id===action.payload.id?action.payload:user) } 
-
+            // case UPDATE_USER_FAIL:
+            //     return { ...state,loading:false,error:action.payload}   
      default:
             return state;
 

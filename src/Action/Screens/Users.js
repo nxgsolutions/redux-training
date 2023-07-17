@@ -24,6 +24,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { Grid, Typography } from '@mui/material';
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -33,13 +34,14 @@ const Users = () => {
   const dispatch = useDispatch();
  
   const [open, setOpen] = React.useState(false);
-
   const [errorOpen, setErrorOpen] = React.useState(false);
   const [deleteOpen, setDeleteOpen] = React.useState(false);
+  // const [updateOpen, setUpdateOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(true);
     setDeleteOpen(true);
+    // setUpdateOpen(true);
   };
 
   const handleClose = (event, reason) => {
@@ -49,7 +51,9 @@ const Users = () => {
 
     setOpen(false);
     setDeleteOpen(false);
+    // setUpdateOpen(false);
   };
+
   const usersData = useSelector((state) => state.usersData);
   const { getLoading,loading, users, error, userById,showMessage,deletedMessage } = usersData;
 
@@ -76,6 +80,13 @@ const Users = () => {
     error && setErrorOpen(true)
   }, [deletedMessage])//run every time when state changed
 
+  // useEffect(() => { 
+  //   updatedMessage &&  setUpdateOpen(true);
+  //   console.log("Second Useeffect",updateOpen)
+
+  //   error && setErrorOpen(true)
+  // }, [updatedMessage])//run every time when state changed
+
 
 
   console.log("screen data", userById)
@@ -84,13 +95,14 @@ const Users = () => {
     dispatch(DeleteUser(id));
   }
   const handleEdit = (id) => {
-    //console.log("id===",id)
+    console.log("id===",id)
     dispatch({ type: GET_USER_ID_SUCCESS, payload: id })
 
   }
   return (
 
     <div>
+      <Grid container  xs={12} lg={12} >
         {
            showMessage &&  <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
@@ -104,13 +116,29 @@ const Users = () => {
              {error}
            </Alert>
          </Snackbar>  }
+
      {deletedMessage &&  <Snackbar open={deleteOpen} autoHideDuration={2000} onClose={handleClose}>
            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
               Deleted successfuly!
            </Alert>
          </Snackbar>  }
-         <h1>Add New Data</h1>
+
+     {/* {updatedMessage &&  <Snackbar open={updateOpen} autoHideDuration={2000} onClose={handleClose}>
+           <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+              Updated successfuly!
+           </Alert>
+         </Snackbar>  } */}
+
+  <Grid container xs={2} sm={2} md={2} lg={2}  ></Grid>
+    <Grid item xs={8}  sm={8} md={8} lg={8} >
+     
+        <h1>Add New Data</h1>
+          
       <AddUserScreen userById={userById ? userById : false} />
+      </Grid>
+      
+      <Grid container xs={2} sm={2} md={2} lg={2}  ></Grid>
+     
       <h1>Users</h1>
       {/* <button onClick={() => setstate(state + 1)}>Click me</button>
       <h2>state=={state}</h2> */}
@@ -132,16 +160,14 @@ const Users = () => {
               key={user.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              {/* <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell> */}
+               
               <TableCell align="right">{user.name.toUpperCase()}</TableCell>
               <Stack direction="row" spacing={2}>
-      <Button color="secondary" onClick={() => handleEdit(user.id)}><EditIcon/></Button>
+      <Button color="secondary" onClick={(e) => handleEdit(user.id)}><EditIcon/></Button>
       <Button color="secondary"onClick={(e) => handleDelete(user.id)}><DeleteIcon/></Button>
        
     </Stack>
-              {/* <TableCell align="right">{user. class}</TableCell> */}
+               
         
             </TableRow>
           )).reverse()
@@ -149,13 +175,17 @@ const Users = () => {
         </TableBody>
       </Table>
     </TableContainer>
-
+    
+       
       {/* {
         getLoading ? <CircularProgress /> : error ? "Network error" : users?.map((user, index) => (
           <p>{user.name.toUpperCase()} <button onClick={() => handleEdit(user.id)}>Edit</button>  <button onClick={(e) => handleDelete(user.id)}>Delete</button>  </p>
         )).reverse()
       } */}
       {/* <Home state={state}></Home> */}
+       
+     
+      </Grid>
     </div>
   )
 }
