@@ -7,6 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import Home from '../../Home'
+import Box from '@mui/material/Box';
 import AddUserScreen from './AddUserScreen'
 import { DeleteUser } from '../userAction';
 import { GetUserByID } from '../userAction';
@@ -102,7 +103,8 @@ const Users = () => {
   return (
 
     <div>
-      <Grid container  xs={12} lg={12} >
+       
+      
         {
            showMessage &&  <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
@@ -129,21 +131,25 @@ const Users = () => {
            </Alert>
          </Snackbar>  } */}
 
-  <Grid container xs={2} sm={2} md={2} lg={2}  ></Grid>
-    <Grid item xs={8}  sm={8} md={8} lg={8} >
+  
      
-        <h1>Add New Data</h1>
-          
-      <AddUserScreen userById={userById ? userById : false} />
-      </Grid>
+<Grid container  xs={12}  sm={12} md={12} lg={12} >
+<Grid item xs={2}  sm={2} md={2} lg={2} ></Grid>
+
+<Grid sx={{justifyContent:'center'}}item xs={8}  sm={8} md={8} lg={8} >
+<h1>Add New Data</h1>
+<AddUserScreen userById={userById ? userById : false} />
+</Grid>
+
+<Grid item xs={2}  sm={2} md={2} lg={2} ></Grid>
+</Grid>
+    <Grid container sx={{justifyContent:'center'}} xs={12}  sm={12} md={12} lg={12} >
       
-      <Grid container xs={2} sm={2} md={2} lg={2}  ></Grid>
-     
       <h1>Users</h1>
       {/* <button onClick={() => setstate(state + 1)}>Click me</button>
       <h2>state=={state}</h2> */}
       <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+      <Table  size="small" aria-label="a dense table">
         <TableHead sx={{backgroundColor:"#b897c5ba"}}>
           <TableRow>
              
@@ -184,8 +190,9 @@ const Users = () => {
       } */}
       {/* <Home state={state}></Home> */}
        
-     
+      
       </Grid>
+       
     </div>
   )
 }

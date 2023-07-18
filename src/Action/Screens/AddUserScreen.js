@@ -42,12 +42,14 @@ const AddUserScreen = (props) => {
   }
   function updateUser() {
     console.log("called update")
-    dispatch(UpdateUser({ id: props.userById.id, name: name }))
+    dispatch(UpdateUser({ id: props.userById.id, name: getValues("name") }))
     reset();
   }
 
   function saveUpdate() {
-    if (props.userById === true) {
+    console.log("updated",props.userById)
+    if (props.userById.id > 0  ) {
+      console.log("if condition")
       updateUser();
     } else {
       postUser();
@@ -80,8 +82,8 @@ const AddUserScreen = (props) => {
         <br />
         <small>{errors?.class?.message}</small> */}
         <br />
-        {props.userById ? <button className='btn' type="submit" >Update</button>
-          : <button className='btn' type="submit" >Save</button>}
+        {props.userById ? <button className='btn'  type="submit">Update</button>
+          : <button className='btn' type="submit">Save</button>}
 
       </form>
 
