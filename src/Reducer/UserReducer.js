@@ -1,7 +1,7 @@
 import React from 'react'
 import { GET_USER_REQUEST, GET_USER_SUCCESS,GET_USER_FAIL,ADD_USER_SUCCESS,ADD_USER_REQUEST,ADD_USER_FAIL,DELETE_USER_REQUEST, DELETE_USER_SUCCESS, DELETE_USER_FAIL ,GET_USER_ID_REQUEST,GET_USER_ID_SUCCESS,GET_USER_ID_FAIL,GET_USER_ID_RESET,UPDATE_USER_REQUEST,UPDATE_USER_SUCCESS,UPDATE_USER_FAIL } from '../Constants/userConstant'
 
-export const UserReducer = (state={users:[],userById:[],showMessage:"",deletedMessage:"" }, action) => {
+export const UserReducer = (state={users:[],userById:[],showMessage:"",deletedMessage:"",updatedMessage:"" }, action) => {
 
     console.log("Reducer data",action.payload)
 
@@ -46,7 +46,7 @@ export const UserReducer = (state={users:[],userById:[],showMessage:"",deletedMe
             // case UPDATE_USER_REQUEST:
             //     return { ...state,loading:true,userById:[] }   
          case UPDATE_USER_SUCCESS:
-            return  { ...state,loading:false,users:state.users.map(user=>user.id===action.payload.id?action.payload:user) } 
+            return  { ...state,loading:false,users:state.users.map(user=>user.id===action.payload.id?action.payload:user),updatedMessage:true } 
             // case UPDATE_USER_FAIL:
             //     return { ...state,loading:false,error:action.payload}   
      default:

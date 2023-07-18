@@ -37,12 +37,12 @@ const Users = () => {
   const [open, setOpen] = React.useState(false);
   const [errorOpen, setErrorOpen] = React.useState(false);
   const [deleteOpen, setDeleteOpen] = React.useState(false);
-  // const [updateOpen, setUpdateOpen] = React.useState(false);
+  const [updateOpen, setUpdateOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(true);
     setDeleteOpen(true);
-    // setUpdateOpen(true);
+    setUpdateOpen(true);
   };
 
   const handleClose = (event, reason) => {
@@ -52,11 +52,11 @@ const Users = () => {
 
     setOpen(false);
     setDeleteOpen(false);
-    // setUpdateOpen(false);
+    setUpdateOpen(false);
   };
 
   const usersData = useSelector((state) => state.usersData);
-  const { getLoading,loading, users, error, userById,showMessage,deletedMessage } = usersData;
+  const { getLoading,loading, users, error, userById,showMessage,deletedMessage,updatedMessage } = usersData;
 
   const [state, setstate] = useState(0)
   console.log("userById", userById)
@@ -81,12 +81,12 @@ const Users = () => {
     error && setErrorOpen(true)
   }, [deletedMessage])//run every time when state changed
 
-  // useEffect(() => { 
-  //   updatedMessage &&  setUpdateOpen(true);
-  //   console.log("Second Useeffect",updateOpen)
+  useEffect(() => { 
+    updatedMessage &&  setUpdateOpen(true);
+    console.log("Second Useeffect",updateOpen)
 
-  //   error && setErrorOpen(true)
-  // }, [updatedMessage])//run every time when state changed
+    error && setErrorOpen(true)
+  }, [updatedMessage])//run every time when state changed
 
 
 
@@ -125,11 +125,11 @@ const Users = () => {
            </Alert>
          </Snackbar>  }
 
-     {/* {updatedMessage &&  <Snackbar open={updateOpen} autoHideDuration={2000} onClose={handleClose}>
+     {updatedMessage &&  <Snackbar open={updateOpen} autoHideDuration={2000} onClose={handleClose}>
            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
               Updated successfuly!
            </Alert>
-         </Snackbar>  } */}
+         </Snackbar>  }
 
   
      
