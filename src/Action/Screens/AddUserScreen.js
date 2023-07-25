@@ -35,14 +35,17 @@ const AddUserScreen = (props) => {
 
 
   function postUser() {
-    console.log("called")
     const postData = { name: getValues("name") }
+    console.log("called")
+    console.log("name is here",postData)
     dispatch(AddUser(postData))
     reset();
   }
+  
   function updateUser() {
     console.log("called update")
     dispatch(UpdateUser({ id: props.userById.id, name: getValues("name") }))
+    console.log("updated data")
     reset();
   }
 
@@ -82,9 +85,9 @@ const AddUserScreen = (props) => {
         <br />
         <small>{errors?.class?.message}</small> */}
         <br />
-        {props.userById ? <button className='btn'  type="submit">Update</button>
-          : <button className='btn' type="submit">Save</button>}
 
+        {props.userById ? <button className='btn'  type="submit">Update</button>  :
+          <button className='btn' type="submit">Save</button>}
       </form>
 
     </div>

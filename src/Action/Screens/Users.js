@@ -82,7 +82,7 @@ const Users = () => {
   }, [deletedMessage])//run every time when state changed
 
   useEffect(() => { 
-    updatedMessage &&  setUpdateOpen(true);
+     updatedMessage  &&  setUpdateOpen(true);
     console.log("Second Useeffect",updateOpen)
 
     error && setErrorOpen(true)
@@ -125,7 +125,7 @@ const Users = () => {
            </Alert>
          </Snackbar>  }
 
-     {updatedMessage &&  <Snackbar open={updateOpen} autoHideDuration={2000} onClose={handleClose}>
+     {updatedMessage  &&  <Snackbar open={updateOpen} autoHideDuration={2000} onClose={handleClose}>
            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
               Updated successfuly!
            </Alert>
@@ -139,6 +139,7 @@ const Users = () => {
 <Grid sx={{justifyContent:'center'}}item xs={8}  sm={8} md={8} lg={8} >
 <h1>Add New Data</h1>
 <AddUserScreen userById={userById ? userById : false} />
+
 </Grid>
 
 <Grid item xs={2}  sm={2} md={2} lg={2} ></Grid>
@@ -153,7 +154,7 @@ const Users = () => {
         <TableHead sx={{backgroundColor:"#b897c5ba"}}>
           <TableRow>
              
-            <TableCell align="right">Name</TableCell>
+            <TableCell align="left">Name</TableCell>
             <TableCell>Edit /  Delete</TableCell>
              
              
@@ -167,7 +168,7 @@ const Users = () => {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
                
-              <TableCell align="right">{user.name.toUpperCase()}</TableCell>
+              <TableCell align="left">{user.name.toUpperCase()}</TableCell>
               <Stack direction="row" spacing={2}>
       <Button color="secondary" onClick={(e) => handleEdit(user.id)}><EditIcon/></Button>
       <Button color="secondary"onClick={(e) => handleDelete(user.id)}><DeleteIcon/></Button>

@@ -19,8 +19,10 @@ export const GetUser = () => async(dispatch)=>{
         dispatch({ type:GET_USER_FAIL,payload:"Network Error!!"})
     }
 }
+
+
 export const AddUser = (postData) => async(dispatch)=>{
-    
+
     dispatch({ type:ADD_USER_REQUEST,payload:{}})
 
     try{
