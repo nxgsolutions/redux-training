@@ -10,7 +10,7 @@ import Home from '../../Home'
 import AddUserScreen from './AddUserScreen'
 import { DeleteUser } from '../userAction';
 import { GetUserByID } from '../userAction';
-import { Navigate } from 'react-router-dom';
+import { Navigate, redirect } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Table from '@mui/material/Table';
@@ -35,7 +35,8 @@ const Users = () => {
   const [open, setOpen] = React.useState(false);
 
   const [errorOpen, setErrorOpen] = React.useState(false);
-
+ const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+ console.log("userInfo",userInfo);
   const handleClick = () => {
     setOpen(true);
   };
@@ -78,6 +79,10 @@ const Users = () => {
     dispatch({ type: GET_USER_ID_SUCCESS, payload: id })
 
   }
+  const logOutHandle = ()=>{
+    localStorage.removeItem("userInfo")
+    redirect("/login")
+  }
   return (
 
     <div>
@@ -94,7 +99,8 @@ const Users = () => {
              {error}
            </Alert>
          </Snackbar>  }
-         <h1>Add New Data</h1>
+         <h1>welcome {userInfo?.name}</h1>
+         <button onClick={()=>logOutHandle()}>LOGOUT</button>
       <AddUserScreen userById={userById ? userById : false} />
       <h1>Users</h1>
       {/* <button onClick={() => setstate(state + 1)}>Click me</button>

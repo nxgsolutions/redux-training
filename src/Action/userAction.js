@@ -80,3 +80,24 @@ export const UpdateUser = (postData) => async(dispatch)=>{
 }
 
 
+
+export const LoginUser = (postData) => async(dispatch)=>{
+    
+   // dispatch({ type:ADD_USER_REQUEST,payload:{}})
+
+    try{
+        const  response = await axios.post('https://tanchhui-api.nxgecom.in/api/login',postData);
+        console.log("post action",response.data)
+        //dispatch({ type:ADD_USER_SUCCESS,payload:response.data})
+        localStorage.setItem("userInfo",JSON.stringify(response.data))        
+    }
+    catch(error)
+    {
+       // dispatch({ type:ADD_USER_FAIL,payload:error})
+    }
+ 
+
+
+}
+
+
