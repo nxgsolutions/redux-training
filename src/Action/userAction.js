@@ -1,5 +1,5 @@
 import React from 'react'
-import { GET_USER_REQUEST,GET_USER_SUCCESS,GET_USER_FAIL,ADD_USER_REQUEST,ADD_USER_SUCCESS,ADD_USER_FAIL, DELETE_USER_REQUEST, DELETE_USER_SUCCESS, DELETE_USER_FAIL,UPDATE_USER_REQUEST,UPDATE_USER_SUCCESS,UPDATE_USER_FAIL} from '../Constants/userConstant';
+import { GET_USER_REQUEST,USER_LOGIN_SUCCESS,USER_LOGIN_REQUEST,USER_LOGIN_FAILED,GET_USER_SUCCESS,GET_USER_FAIL,ADD_USER_REQUEST,ADD_USER_SUCCESS,ADD_USER_FAIL, DELETE_USER_REQUEST, DELETE_USER_SUCCESS, DELETE_USER_FAIL,UPDATE_USER_REQUEST,UPDATE_USER_SUCCESS,UPDATE_USER_FAIL} from '../Constants/userConstant';
 import axios from 'axios';
 
 export const GetUser = () => async(dispatch)=>{
@@ -83,17 +83,23 @@ export const UpdateUser = (postData) => async(dispatch)=>{
 
 export const LoginUser = (postData) => async(dispatch)=>{
     
-   // dispatch({ type:ADD_USER_REQUEST,payload:{}})
+    dispatch({ type:USER_LOGIN_REQUEST,payload:{}})
 
     try{
         const  response = await axios.post('https://tanchhui-api.nxgecom.in/api/login',postData);
         console.log("post action",response.data)
-        //dispatch({ type:ADD_USER_SUCCESS,payload:response.data})
-        localStorage.setItem("userInfo",JSON.stringify(response.data))        
+        if(response.data.response==true)
+        {
+        dispatch({ type:USER_LOGIN_SUCCESS,payload:response.data})
+        localStorage.setItem("userInfo",JSON.stringify(response.data))  
+        }
+        else{
+            dispatch({ type:USER_LOGIN_FAILED,payload:{msg:response.data.error}})
+        }
     }
     catch(error)
     {
-       // dispatch({ type:ADD_USER_FAIL,payload:error})
+        dispatch({ type:USER_LOGIN_FAILED,payload:error})
     }
  
 

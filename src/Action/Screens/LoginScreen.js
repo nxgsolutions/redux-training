@@ -1,11 +1,25 @@
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import axios from "axios"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { LoginUser } from "../userAction"
+import { useNavigate } from "react-router-dom"
 export default function LoginScreen() {
+    const navigation = useNavigate()
     const userRef = useRef()
     const passwordRef = useRef()
     const dispatch =useDispatch()
+
+  const userData= useSelector((state)=>state.usersData)
+  const {loginLoading,loginError,loggedInUser} = userData;
+  const userInfo= localStorage.getItem("userInfo")
+  useEffect(()=>{
+        if(userInfo)
+        {
+            navigation("/users")
+        }
+  },[])
+
+  console.log("loginLoading,loginError,loggedInuser",loginLoading,loginError,loggedInUser);
     const handleLogin = (e) => {
         e.preventDefault()
         console.log("runnn");
@@ -38,6 +52,7 @@ export default function LoginScreen() {
                 <label>Password:</label><input type="password" ref={passwordRef} name="username" />
                 <br />
                 <button type="button" onClick={(e) => handleLogin(e)} >LOGIN </button>
+                {loginLoading?"Loading..":loginError?"Unable to Login":navigation("/users")}
             </form>
         </div>
     )
