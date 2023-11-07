@@ -22,6 +22,7 @@ const AddUserScreen = (props) => {
   console.log("props.userbyid",props.userById);
 
   const [name, setName] = useState('')
+  const [Image, setImage] = useState('')
   const [studentClass, setStudentClass] = useState('')
 
   const dispatch =useDispatch();
@@ -31,8 +32,9 @@ const AddUserScreen = (props) => {
 
   function postUser(){
     console.log("called")
-
-    const postData ={ name: getValues("name") }
+   let  values= getValues()
+   console.log("values",values.image[0])
+    const postData ={ name: getValues("name"), address:"test",class:"10th", image: values.image[0] }
 
     dispatch(AddUser(postData))
     
@@ -41,6 +43,23 @@ const AddUserScreen = (props) => {
     console.log("called update")
     dispatch(UpdateUser({id:props.userById.id,name:name}))
   }
+
+  const handleImage = (e) => {
+    // const originalimage = e.target.files[0];
+    // console.log("image===", originalimage);
+    setImage(e.target.files[0]);
+    // const kbSize=originalimage?.size/1024
+    // if(kbSize>600){
+    //   setDesktopBannerSizeError("Image can't be greater than 600KB!")
+    // }else{
+    //   setDesktopBannerSizeError("")
+    // }
+
+    // props.setInput({ ...props.input, Image: e.target.value })
+  };
+
+
+
     useEffect(()=>{
       props.userById && setName(props.userById.name) 
     
@@ -61,6 +80,11 @@ const AddUserScreen = (props) => {
       <br/>
       <small>{errors?.class?.message}</small>
       <br/>
+      <input type='file' {...register("image", {
+                                required: true,
+                              })} onChange={(e)=>handleImage(e)}></input>
+
+
     { props.userById ?  <button type="submit" >Update</button> 
 
      : <button className='btn' type="submit" >Save</button> }

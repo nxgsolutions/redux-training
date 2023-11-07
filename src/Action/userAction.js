@@ -23,8 +23,17 @@ export const AddUser = (postData) => async(dispatch)=>{
     
     dispatch({ type:ADD_USER_REQUEST,payload:{}})
 
+    let formData = new FormData()
+
+    formData.append("name",postData.name)
+    formData.append("class",postData.class)
+    formData.append("address",postData.address)
+    formData.append("image",postData.image)
+
+
+
     try{
-        const  response = await axios.post(process.env.REACT_APP_API_URL+`/user`,postData);
+        const  response = await axios.post(process.env.REACT_APP_API_URL+`/user`,formData);
        // console.log("post action",data.data)
         dispatch({ type:ADD_USER_SUCCESS,payload:response.data})
 
